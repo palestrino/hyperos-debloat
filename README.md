@@ -4,6 +4,14 @@ Remove bloatware de Xiaomi / Redmi / POCO com **HyperOS 1** (Android 14) pelo PC
 
 Funciona no **Windows, Linux e macOS** — o mesmo script, sem instalar nada além de Python e ADB.
 
+## Prints
+
+![Tela principal — aparelho conectado e lista de pacotes](screenshots/main.png)
+
+![Preset Só Anúncios — 34 pacotes que trazem anúncio marcados](screenshots/preset-anuncios.png)
+
+![Dicas dos anúncios que não saem só com debloat](screenshots/dicas-anuncios.png)
+
 ## O que ele faz
 
 - Detecta o aparelho por ADB e mostra modelo, Android e versão do HyperOS.
@@ -111,15 +119,16 @@ Depois de uma atualização grande do HyperOS, confira esses ajustes — a Xiaom
 | `iniciar.bat` | Launcher para Windows — dois cliques e abre |
 | `iniciar.sh` | Launcher para Linux e macOS — `./iniciar.sh` |
 | `README.md` | Este guia |
-| `LICENSE` | Licença MIT |
+| `LICENSE` | Licença GPL-2.0 |
+| `screenshots/` | Prints da interface |
 
 ## Observações
 
 - Atualizações grandes do HyperOS podem reinstalar apps removidos. É só rodar o programa de novo.
 - A lista foi conferida em 2026-11-19 a partir de listas públicas de HyperOS/MIUI (MySystemApp, DEV Community, Debloater-Enhanced). Pacotes variam por modelo e região — o programa só remove o que estiver instalado, e mostra ✅ ao lado dos que estão no aparelho.
 - Faça backup dos seus dados antes. O debloat é reversível, mas backup nunca é demais.
-- Versão 1.1.0 — multiplataforma (Windows, Linux, macOS). Para HyperOS 2 a lista é parecida, mas alguns pacotes mudaram de nome; confira a lista antes de usar.
+- Versão 1.1.2 — multiplataforma (Windows, Linux, macOS), licença GPL-2.0. Para HyperOS 2 a lista é parecida, mas alguns pacotes mudaram de nome; confira a lista antes de usar.
 
 ## Licença
 
-MIT — veja `LICENSE`.
+GPL-2.0 — veja `LICENSE`.

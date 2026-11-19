@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (C) 2026 Francisco de Assis Lima Neto
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation. See LICENSE for details.
 """
 HyperOS 1 Debloat — GUI para Windows, Linux e macOS
 =====================================
@@ -44,7 +48,8 @@ Uso: python3 hyperos_debloat.py
      Windows: dois cliques em iniciar.bat
      Linux/macOS: ./iniciar.sh
 Autor: feito para Francisco — HyperOS 1, pt-BR.
-Versão: 1.1.0 (2026-11-19) — versão multiplataforma (Windows/Linux/macOS)
+Versão: 1.1.2 (2026-11-19) — licença GPL-2.0, prints em screenshots/, botões do topo em duas linhas
+Licença: GNU GPL v2 — veja LICENSE.
 """
 
 import os
@@ -69,7 +74,7 @@ except ImportError:
     print("  Windows:       reinstale o Python marcando 'tcl/tk and IDLE'.")
     sys.exit(1)
 
-VERSION = "1.1.0"
+VERSION = "1.1.2"
 # Fontes por sistema (o Tkinter usa a padrão se o nome não existir).
 if sys.platform == "darwin":
     UI_FONT, MONO_FONT = "Helvetica", "Menlo"
@@ -385,11 +390,13 @@ class App(tk.Tk):
         dev = ttk.LabelFrame(self, text=" Aparelho e ADB ", padding=10)
         dev.pack(fill="x", padx=10, pady=(0, 8))
         self.lbl_device = ttk.Label(dev, text="Procurando aparelho…", font=(UI_FONT, 10))
-        self.lbl_device.pack(side="left", fill="x", expand=True)
-        ttk.Button(dev, text="↻ Conectar / Atualizar", command=self.refresh_device).pack(side="left", padx=4)
-        ttk.Button(dev, text="Baixar ADB", command=self._download_adb).pack(side="left", padx=4)
-        ttk.Button(dev, text="Como ativar a depuração USB", command=self._show_help).pack(side="left", padx=4)
-        ttk.Button(dev, text="💡 Anúncios que sobram", command=self._show_ads_tips).pack(side="left", padx=4)
+        self.lbl_device.pack(fill="x")
+        dev_btns = ttk.Frame(dev)
+        dev_btns.pack(fill="x", pady=(6, 0))
+        ttk.Button(dev_btns, text="↻ Conectar / Atualizar", command=self.refresh_device).pack(side="left", padx=(0, 4))
+        ttk.Button(dev_btns, text="Baixar ADB", command=self._download_adb).pack(side="left", padx=4)
+        ttk.Button(dev_btns, text="Como ativar a depuração USB", command=self._show_help).pack(side="left", padx=4)
+        ttk.Button(dev_btns, text="💡 Anúncios que sobram", command=self._show_ads_tips).pack(side="left", padx=4)
 
         # --- Filtros e presets ---
         bar = ttk.Frame(self, padding=(10, 0))
@@ -608,10 +615,11 @@ class App(tk.Tk):
         modelo = info.get("modelo") or "?"
         android = info.get("android") or "?"
         hyperos = info.get("hyperos") or "?"
+        nome = modelo if modelo.startswith(marca) else f"{marca} {modelo}"
         self.lbl_device.configure(
-            text=f"✅ {marca} {modelo}  •  Android {android}  •  HyperOS {hyperos}  •  {info['serial']}")
+            text=f"✅ {nome}  •  Android {android}  •  HyperOS {hyperos}")
         n_curated = sum(1 for p in PACKAGES if p[0] in installed)
-        self.log(f"Conectado: {marca} {modelo} (Android {android}, HyperOS {hyperos}). "
+        self.log(f"Conectado: {nome} (Android {android}, HyperOS {hyperos}). "
                  f"{len(installed)} pacotes no aparelho, {n_curated} da lista curada instalados.")
         self._apply_filter()
 
